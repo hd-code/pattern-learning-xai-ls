@@ -1,15 +1,17 @@
-import patternlearner as pl
+import logging
+import traceback
 
-pl.printHello()
-
-print("Hello")
-
-
-def calcSquare(x: int) -> int:
-    return x * x
+from app import App
 
 
-print("Square of 3:", calcSquare(3))
+app = App()
 
-alph = pl.extractAlphabet(["aa", "ab", "bbbc"])
-print(pl.toString(alph))
+try:
+    app.init()
+    app.run()
+except Exception:
+    logging.error(traceback.format_exc())
+except:
+    print("An unknown error occurred")
+finally:
+    app.exit()
