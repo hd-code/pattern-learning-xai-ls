@@ -1,5 +1,5 @@
 from base import testFunc
-import word as w
+import logic.word as w
 
 
 testFunc(w.get_shortest_words, [

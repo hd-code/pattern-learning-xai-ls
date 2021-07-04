@@ -48,7 +48,7 @@ def test_register_second_callback():
 
 
 def test_fire_unknown_event():
-    e.fire(None, "something", None)
+    e.fire(None, "test_unknown", "This is supposed to be printed to the console")
 
 
 # ------------------------------------------------------------------------------

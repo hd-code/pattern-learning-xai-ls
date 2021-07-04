@@ -1,22 +1,22 @@
+import os
+import sys
 from typing import Callable
 
-# ------------------------------------------------------------------------------
+# Setup ------------------------------------------------------------------------
 
 
-def _setup():
-    import os
-    dir = os.path.dirname(__file__)
-    dir = os.path.join(dir, "..", "src")
-    dir = os.path.abspath(dir)
+dir = os.path.dirname(__file__)
+dir = os.path.join(dir, "..", "src")
+dir = os.path.abspath(dir)
 
-    import sys
-    sys.path.insert(0, dir)
+sys.path.insert(0, dir)
 
-
-_setup()
+print("Testing...\n")
 
 
-# ------------------------------------------------------------------------------
+# Globals ----------------------------------------------------------------------
+
+verbose = sys.argv.__contains__("--verbose") or sys.argv.__contains__("-v")
 
 
 bold = '\033[1m'
@@ -29,43 +29,69 @@ fail = '\033[91m'
 end = '\033[0m'
 
 
-# ------------------------------------------------------------------------------
+# Test Functions ---------------------------------------------------------------
 
 
 def test(func: Callable):
-    print("Test", func.__module__, ">", func.__name__)
+    head_msg = ["Test", func.__module__, ">", func.__name__]
+    head_printed = False
+    if verbose:
+        head_printed = True
+        print(*head_msg)
+
     try:
         func()
-        print(succ + "  success" + end)
+        if verbose:
+            print(succ + "  success" + end)
     except Exception as e:
+        if not head_printed:
+            head_printed = True
+            print(*head_msg)
         print(fail + "  failed" + end)
         print("    error:", e)
     except:
+        if not head_printed:
+            head_printed = True
+            print(*head_msg)
         print(fail + "  failed" + end)
 
 
 def testMany(func: Callable, cases: list[tuple]):
-    print("Test", func.__module__, ">", func.__name__)
+    head_msg = ["Test", func.__module__, ">", func.__name__]
+    head_printed = False
+    if verbose:
+        head_printed = True
+        print(*head_msg)
+
     for case in cases:
         msg = "(" + case + ")"
         try:
             func(*case)
-            print(succ + "  success" + end, msg)
+            if verbose:
+                print(succ + "  success" + end, msg)
         except Exception as e:
+            if not head_printed:
+                head_printed = True
+                print(*head_msg)
             print(fail + "  failed" + end, msg)
             print("    error:", e)
         except:
+            if not head_printed:
+                head_printed = True
+                print(*head_msg)
             print(fail + "  failed" + end, msg)
-
-
-# ------------------------------------------------------------------------------
 
 
 TestCaseFunc = tuple[list[any], any, str]  # (args, return, comment)
 
 
 def testFunc(func: Callable, cases: list[TestCaseFunc]):
-    print("Test", func.__module__, ">", bold + func.__name__ + end)
+    head_msg = ["Test", func.__module__, ">", bold + func.__name__ + end]
+    head_printed = False
+    if verbose:
+        head_printed = True
+        print(*head_msg)
+
     for case in cases:
         input = case[0]
         want = case[1]
@@ -80,8 +106,13 @@ def testFunc(func: Callable, cases: list[TestCaseFunc]):
 
         got = func(*input)
         if got == want:
-            print(succ + "  success" + end, msg)
+            if verbose:
+                print(succ + "  success" + end, msg)
         else:
+            if not head_printed:
+                head_printed = True
+                print(*head_msg)
+
             print(fail + "  failed" + end, msg)
             if note:
                 print("    note:", note)

@@ -1,20 +1,21 @@
 ToDos (required):
 
-[ ] ? hinter pattern => Popup mit Info, was passiert ist und warum
-    - pattern gleich => Es gab nichts neues zu lernen
-    - pattern gleich lang, neue Vars => In der Eingabe gab es bisher noch nicht bekannte Variationen.
-    - pattern kürzer => Die Eingabe war kürzer als alle bisherigen Eingaben.
-    - initial => Bisher gibt es nur eine Eingabe, daher sind Pattern und Eingabe identisch.
-[ ] FormFeld Fehlerbehandlung => /[^\w]{1,20}/, roter Rahmen oder Popup
-[ ] Erklärung des Programms und der Aufgabe
+[x] TableInput Fehlerbehandlung => /[^\w]{1,20}/, roter Rahmen oder Popup
+[x] Pattern ? => Popup mit Info was passiert ist und Warum
+[x] AppHeader => Titel + Erklärung => eventuell weitere Infos in Popup
+[ ] "Handbuch" => README auf deutsch??
 
-ToDos (additional):
+ToDos (optional):
 
-[ ] Konsistenz-Checks umsetzen => In Popup? oder nur Label "konsistent" | "inkonsistent" + Popup mit Inkonsistenzen
-[ ] Erklärung zu Konsistenz-Checks
-[ ] Farb-Themen schöner machen => eigene Farben
+[x] Konsistenz ? => Popup mit Info über Konsistenz
+[x] check => Popup mit Pattern + Wörter + konsistenz | + weitere Eingaben
+[x] Farb-Themen schöner machen => eigene Farben
 
 Ideas:
 
-- update der Word-Size, wenn längere Eingaben getätigt werden (eventuell statische Größe?)
-- Erwähnung pattern x0 ?
+- Update cell width wenn längere Wörter eingegeben werden oder feste max len
+
+Rejected:
+
+[ ] Build für Windows und MacOS => too complicated to setup
+[ ] Restart-Button => recht aufwendig und nicht unbedingt nötig
