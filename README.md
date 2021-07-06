@@ -28,13 +28,13 @@ pipenv run python src
 
 ## Testing
 
-In the folder `test/` are a bunch files, that test the functionality in the `src/` directory. To run all automatic tests simply run:
+In the folder `test/` are a bunch of files, that test the functionality in the `src/` directory. To run all automatic tests simply run:
 
 ```sh
 pipenv run python test
 ```
 
-By default the test files will only print messages for failed tests to the console. To also print successful tests to the console simply add either `--verbose` or `-v` to the above command like this:
+By default the test files will only print messages for failed tests to the console. To also print successful tests to the console, simply add either `--verbose` or `-v` to the above command like this:
 
 ```sh
 pipenv run python test --verbose
@@ -51,7 +51,7 @@ pipenv run python <path-to-testfile> --verbose
 
 ## Building Standalone Executable
 
-Executables can only be build for the operating system the machine currently has. So, `.exe` can only be compiled on a Windows machine, `.app` only on a mac and so on.
+Executables can only be built for the operating system of the machine. So, `.exe` can only be compiled on a Windows machine, `.app` only on a Mac and so on.
 
 Executables are compiled with `PyInstaller`. Run the following command to build the app:
 
