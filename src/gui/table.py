@@ -1,8 +1,11 @@
-import PySimpleGUI as sg
+"""The main table, that tracks user input and generated patterns."""
+
 import re
 
+import PySimpleGUI as sg
+
 import event as ev
-from gui.base import Layout, color_fail, color_succ, color_text, expand, font_bold, font_italic, font_small, size_text_block
+from gui.base import Layout, color_fail, color_succ, color_text, expand, font_bold, font_italic, font_small
 from gui.popup import popup, popup_text
 import logic.pattern as p
 
@@ -11,12 +14,14 @@ import logic.pattern as p
 
 
 def table() -> Layout:
+    """Returns the layout of the table and registers all table events as well."""
     layout = [[sg.Column(_header_row(), key=_key_table)]]
     layout += _input_row(1)
     return layout
 
 
 def after_window_init(window: sg.Window):
+    """Hook that is called after window was created."""
     window[_key_input].set_cursor(cursor_color=color_text)
 
 
@@ -94,7 +99,7 @@ def _table_row(index: int, word: str, pattern: p.Pattern, learning) -> Layout:
             expand(),
             sg.Button("check", key=keys.consistency, font=font_small,
                       tooltip="Check die Konsistenz der Eingaben."),
-            sg.Text("", size=(7, 1)),
+            sg.Text("", size=(6, 1)),
         ],
         [sg.HorizontalSeparator()],
     ]
@@ -114,7 +119,7 @@ def _handle_explain_learn_step(window: sg.Window, event: ev.EventName, _):
 
     (title, text) = _learn_explanation[learn_kind]
     layout = [
-        [sg.Text(text, size=size_text_block)],
+        [sg.Text(text, size=(55, None))],
         [sg.HorizontalSeparator(pad=(0, 10))],
         [
             sg.Text("Pattern vorher:", size=size_left),

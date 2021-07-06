@@ -1,3 +1,8 @@
+"""Defines patterns for a pattern-language.
+
+The main data structure of this application.
+"""
+
 import enum
 import itertools as it
 import typing
@@ -14,6 +19,7 @@ Pattern = list[PatternSymbol]
 
 
 def count_variables(pattern: Pattern) -> int:
+    """Returns the number of variables in a pattern."""
     vars = set()
     for pattern_symbol in pattern:
         if isinstance(pattern_symbol, int):
@@ -22,6 +28,7 @@ def count_variables(pattern: Pattern) -> int:
 
 
 def has_variables(pattern: Pattern) -> bool:
+    """Returns true if there are variables in a pattern."""
     for pattern_symbol in pattern:
         if isinstance(pattern_symbol, int):
             return True
@@ -29,6 +36,7 @@ def has_variables(pattern: Pattern) -> bool:
 
 
 def to_string(pattern: Pattern) -> str:
+    """Gives a string representation of a pattern."""
     result = ""
     for pattern_symbol in pattern:
         if isinstance(pattern_symbol, str):
@@ -49,6 +57,11 @@ def _sub(number) -> str:
 
 
 def learn_iterative(word: w.Word, pattern: Pattern = []) -> Pattern:
+    """Do one learning step.
+
+    The current pattern and the entered word are passed as arguments. The
+    improved pattern is then returned.
+    """
     result: Pattern = []
 
     if len(pattern) == 0 or len(word) < len(pattern):
@@ -80,7 +93,8 @@ def learn_iterative(word: w.Word, pattern: Pattern = []) -> Pattern:
     return result
 
 
-def learn_set(words: w.Words) -> Pattern:
+def learn_set(words: list[w.Word]) -> Pattern:
+    """Learns a pattern from a whole list of words."""
     shortest_words = w.get_shortest_words(words)
     pattern = []
     for word in shortest_words:
@@ -92,6 +106,7 @@ def learn_set(words: w.Words) -> Pattern:
 
 
 class Learning(enum.IntEnum):
+    """The different "kinds" of learning that can appear."""
     initial = enum.auto()
     final = enum.auto()
     ignored = enum.auto()
@@ -101,6 +116,7 @@ class Learning(enum.IntEnum):
 
 
 def get_learning(prev_pattern: Pattern, word: w.Word, next_pattern: Pattern) -> Learning:
+    """Analyzes what kind of learning took place."""
     if prev_pattern == []:
         return Learning.initial
 
@@ -121,14 +137,20 @@ def get_learning(prev_pattern: Pattern, word: w.Word, next_pattern: Pattern) -> 
 # ------------------------------------------------------------------------------
 
 
-def is_consistent(pattern: Pattern, words: w.Words) -> bool:
+def is_consistent(pattern: Pattern, words: list[w.Word]) -> bool:
+    """Returns true if a pattern generates all given words."""
     for word in words:
         if not check_word(pattern, word):
             return False
     return True
 
 
-def check_words(pattern: Pattern, words: w.Words) -> list[tuple[w.Word, bool]]:
+def check_words(pattern: Pattern, words: list[w.Word]) -> list[tuple[w.Word, bool]]:
+    """Checks a list of words against a pattern.
+
+    Returns a list of tuples containing the word and a bool, which is true when
+    the pattern can generate this word.
+    """
     result = []
     for word in words:
         result.append((word, check_word(pattern, word)))
@@ -136,6 +158,11 @@ def check_words(pattern: Pattern, words: w.Words) -> list[tuple[w.Word, bool]]:
 
 
 def check_word(pattern: Pattern, word: w.Word) -> bool:
+    """Checks a single word against a pattern.
+
+    This function tries different combinations of variable lengths against the
+    word. This is most performant for checking single words.
+    """
     if not has_variables(pattern):
         return "".join(pattern) == word
 
@@ -198,6 +225,16 @@ def _calc_word_len(pattern: Pattern, var_len_combi: tuple[int]) -> int:
 
 
 def generate_all_words(pattern: Pattern, alphabet: w.Alphabet, max_var_len: int) -> set[str]:
+    """Generates all possible words from a pattern and an alphabet up to a
+    specific number of characters for each variable (including all shorter
+    combinations).
+
+    The amount of generated words quickly explodes. So, use with care! For
+    shorter lists of words it is usually better to check the consistency for
+    each word individually. See `check_word`.
+
+    :param max_var_len: The maximum number of characters for each variable.
+    """
     chars = list(alphabet)
     num_of_vars = count_variables(pattern)
     combinations = _get_combinations(chars, num_of_vars, max_var_len)

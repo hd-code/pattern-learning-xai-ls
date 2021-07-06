@@ -1,3 +1,5 @@
+"""All visual aspects of the application."""
+
 import PySimpleGUI as sg
 
 import gui.header as _header
@@ -10,6 +12,7 @@ app_title = "Lernen von Pattern-Sprachen nach Lange und Wiehagen"
 
 
 def create_layout() -> Layout:
+    """Creates the applications layout and registers all needed events."""
     layout = []
     layout += _header.header()
     layout += _table.table()
@@ -17,4 +20,5 @@ def create_layout() -> Layout:
 
 
 def after_window_init(window: sg.Window):
+    """Hook that is called after window was created."""
     _table.after_window_init(window)

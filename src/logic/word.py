@@ -1,9 +1,11 @@
+"""Defines a word and helper functions for those words."""
+
 WordSymbol = str  # just one character
 Word = str  # string of characters
-Words = list[str]
 
 
-def get_shortest_words(words: Words) -> Words:
+def get_shortest_words(words: list[Word]) -> list[Word]:
+    """Returns a list of the shortest words from a longer list of words."""
     shortest_words = list()
     shortest_word_len = 999999999999999
     for word in words:
@@ -25,7 +27,8 @@ def get_shortest_words(words: Words) -> Words:
 Alphabet = set[WordSymbol]
 
 
-def get_alphabet(words: Words) -> Alphabet:
+def get_alphabet(words: list[Word]) -> Alphabet:
+    """Extracts all appearing characters in a list of words."""
     result = set()
     for word in words:
         for symbol in word:

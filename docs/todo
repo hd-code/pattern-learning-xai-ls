@@ -1,0 +1,22 @@
+ToDos (required):
+
+[x] TableInput Fehlerbehandlung => /[^\w]{1,20}/, roter Rahmen oder Popup
+[x] Pattern ? => Popup mit Info was passiert ist und Warum
+[x] AppHeader => Titel + Erklärung => eventuell weitere Infos in Popup
+[x] "Handbuch" => README auf deutsch??
+
+ToDos (optional):
+
+[x] Konsistenz ? => Popup mit Info über Konsistenz
+[x] check => Popup mit Pattern + Wörter + konsistenz | + weitere Eingaben
+[x] Farb-Themen schöner machen => eigene Farben
+[x] Build für Windows und MacOS
+[x] Add docstring to all public functions
+
+Ideas:
+
+- Update cell width wenn längere Wörter eingegeben werden oder feste max len
+
+Rejected:
+
+[ ] Restart-Button => recht aufwendig und nicht unbedingt nötig

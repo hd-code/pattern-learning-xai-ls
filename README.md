@@ -51,4 +51,14 @@ pipenv run python <path-to-testfile>
 pipenv run python <path-to-testfile> --verbose
 ```
 
+## Building Standalone Executable
 
+Executables can only be build for the operating system the machine currently has. So, `.exe` can only be compiled on a Windows machine, a macOS executable only on a mac and so on.
+
+Executables are compiled with `PyInstaller`. Run the following command to build the app:
+
+```sh
+pipenv run pyinstaller -n pattern-learning-xai -w -F --clean src/__main__.py
+```
+
+The executable will be put into the `dist/` directory.

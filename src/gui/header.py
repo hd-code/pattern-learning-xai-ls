@@ -1,3 +1,5 @@
+"""The header area of the main window before the table."""
+
 import PySimpleGUI as sg
 
 from gui.base import Layout, expand, font_bold, font_heading, font_small

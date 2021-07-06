@@ -1,3 +1,11 @@
+"""Base setup for test files.
+
+Should be imported in every test file!
+
+By default, only failed tests are printed to the console. With the flag
+"--verbose" or "-v" all tests and their results are printed out.
+"""
+
 import os
 import sys
 from typing import Callable
@@ -33,6 +41,11 @@ end = '\033[0m'
 
 
 def test(func: Callable):
+    """Executes a test function.
+
+    A test fails when an exception is thrown during the execution of the
+    function.
+    """
     head_msg = ["Test", func.__module__, ">", func.__name__]
     head_printed = False
     if verbose:
@@ -57,6 +70,10 @@ def test(func: Callable):
 
 
 def testMany(func: Callable, cases: list[tuple]):
+    """Executes a test function for every set of arguments provided in a list.
+
+    If an exception is thrown during one of the test cases, that case fails.
+    """
     head_msg = ["Test", func.__module__, ">", func.__name__]
     head_printed = False
     if verbose:
@@ -86,6 +103,11 @@ TestCaseFunc = tuple[list[any], any, str]  # (args, return, comment)
 
 
 def testFunc(func: Callable, cases: list[TestCaseFunc]):
+    """Tests a pure function against a list inputs and expected outputs.
+
+    Can be used to test pure functions. It passes the arguments of a test case
+    to the method and compares the returned value against the expected outcome.
+    """
     head_msg = ["Test", func.__module__, ">", bold + func.__name__ + end]
     head_printed = False
     if verbose:

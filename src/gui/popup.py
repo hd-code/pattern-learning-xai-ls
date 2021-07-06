@@ -1,5 +1,11 @@
-import PySimpleGUI as sg
+"""Better popups than what PySimpleGui offers.
+
+Defines popups, which are additional windows used to communicate with the user.
+"""
+
 import time
+
+import PySimpleGUI as sg
 
 import event as ev
 from gui.base import Layout, expand, font_small, font_heading, window_config

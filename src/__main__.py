@@ -1,3 +1,5 @@
+"""Executes the app."""
+
 import logging
 import traceback
 
