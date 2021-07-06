@@ -4,20 +4,18 @@ This project implements an application, that learns string patterns. It uses an 
 
 This project is part of the master module "Lernende Systeme" at the FH Erfurt.
 
-## Installation
+## Requirements
 
-**Python 3.9** or later is required. Find out more at <https://www.python.org>.
+- Python 3.9 *or later*. See: <https://www.python.org>
+- `pipenv` – a package manager that creates isolated environments  
+  install by running: `python3 -m pip install pipenv`
 
-This project uses `pipenv` to manage its dependencies. It can be installed by using `pip` which ships with python. To do that, run:
+### Installation
 
-```sh
-python3 -m pip install pipenv
-```
-
-To install all dependencies for this project, run the following command in this projects directory:
+From the project's directory run:
 
 ```sh
-pipenv install
+pipenv install --dev
 ```
 
 ## Usage
@@ -53,7 +51,7 @@ pipenv run python <path-to-testfile> --verbose
 
 ## Building Standalone Executable
 
-Executables can only be build for the operating system the machine currently has. So, `.exe` can only be compiled on a Windows machine, a macOS executable only on a mac and so on.
+Executables can only be build for the operating system the machine currently has. So, `.exe` can only be compiled on a Windows machine, `.app` only on a mac and so on.
 
 Executables are compiled with `PyInstaller`. Run the following command to build the app:
 
